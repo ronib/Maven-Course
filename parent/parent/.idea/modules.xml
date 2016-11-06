@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$USER_HOME$/p1/p1.iml" filepath="$USER_HOME$/p1/p1.iml" />
+      <module fileurl="file://$USER_HOME$/p2/p2.iml" filepath="$USER_HOME$/p2/p2.iml" />
+      <module fileurl="file://$USER_HOME$/p3/p3.iml" filepath="$USER_HOME$/p3/p3.iml" />
+      <module fileurl="file://$PROJECT_DIR$/roni.iml" filepath="$PROJECT_DIR$/roni.iml" />
+    </modules>
+  </component>
+</project>
