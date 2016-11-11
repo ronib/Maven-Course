@@ -1,0 +1,28 @@
+diff jad/MyFactorial.java jad2/MyFactorial.java
+19,22c19,25
+<         if(n <= 1)
+<             return acc;
+<         else
+<             return factorial(acc * n, n - 1);
+---
+>         do
+>         {
+>             if(n <= 1)
+>                 return acc;
+>             n--;
+>             acc = acc * n;
+>         } while(true);
+diff jad/ShowRec.java jad2/ShowRec.java
+19,22c19,25
+<         if(x == 0)
+<             return n;
+<         else
+<             return add(n + 1, x - 1);
+---
+>         do
+>         {
+>             if(x == 0)
+>                 return n;
+>             x--;
+>             n = n + 1;
+>         } while(true);

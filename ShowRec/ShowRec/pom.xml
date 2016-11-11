@@ -1,0 +1,137 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.bom</groupId>
+	<artifactId>MyTest</artifactId>
+	<packaging>jar</packaging>
+	<version>1.0-SNAPSHOT</version>
+	<name>MyMojojo Maven Mojo</name>
+	
+	
+	
+	
+	<profiles>
+		<profile>
+			<id>winonly</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+				<os>
+					<family>windows</family>
+				</os>
+				
+			</activation>
+			<build>
+				<plugins>
+
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>exec-maven-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>first</id>
+								<phase>process-classes</phase>
+								<goals>
+									<goal>exec</goal>
+								</goals>
+								<configuration>
+									<executable>f:\\tools\\jad.exe</executable>
+									<workingDirectory>target\\classes</workingDirectory>
+									<arguments>
+										<argument>-sjava</argument>
+										<argument>-o</argument>
+										<argument>-djad</argument>
+										<argument>./**/*.class</argument>
+									</arguments>
+								</configuration>
+							</execution>
+							<execution>
+								<id>second</id>
+								<phase>prepare-package</phase>
+								<goals>
+									<goal>exec</goal>
+								</goals>
+								<configuration>
+									<executable>f:\\tools\\jad.exe</executable>
+									<workingDirectory>target\\classes</workingDirectory>
+									<arguments>
+										<argument>-sjava</argument>
+										<argument>-o</argument>
+										<argument>-djad2</argument>
+										<argument>./**/*.class</argument>
+									</arguments>
+								</configuration>
+							</execution>
+							<execution>
+								<id>third</id>
+								<phase>prepare-package</phase>
+								<goals>
+									<goal>exec</goal>
+								</goals>
+								<configuration>
+									<executable>c:\Program Files (x86)\GnuWin32\bin\diff.exe</executable>
+									<workingDirectory>target\classes</workingDirectory>
+									<outputFile>TailOptReport.txt</outputFile>
+									<arguments>
+										<argument>jad</argument>
+										<argument>jad2</argument>
+									</arguments>
+									<successCodes>
+										<successCode>0</successCode>
+										<successCode>1</successCode>
+									</successCodes>
+								</configuration>
+							</execution>
+							
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>com.bom</groupId>
+						<artifactId>MyMojojo</artifactId>
+						<version>1.0-SNAPSHOT</version>
+						<executions>
+							<execution>
+								<goals>
+									<goal>tail-rec-optimize</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+					<!-- plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-site-plugin</artifactId> 
+						<version>3.0-beta-3</version> </plugin -->
+				</plugins>
+			</build>
+			<reporting>
+				<plugins>
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>findbugs-maven-plugin</artifactId>
+						<version>3.0.0</version>
+					</plugin>
+				</plugins>
+			</reporting>
+		</profile>
+	</profiles>
+<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+	<reporting>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-checkstyle-plugin</artifactId>
+				<version>2.10</version>
+			</plugin>
+			<plugin>
+				<groupId>com.bom</groupId>
+				<artifactId>MyMojojo</artifactId>
+				<version>1.0-SNAPSHOT</version>
+			</plugin>
+		</plugins>
+	</reporting>
+
+</project>
